@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Collection and Formatting</title>
+  <style>
+    /* CSS styles for the formatted list */
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    li {
+      padding: 5px;
+      background-color: #f2f2f2;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Data Collection and Formatting</h1>
+  
+  <h2>Collected Data:</h2>
+  <ul id="data-list"></ul>
+  
+  <script>
+    // JavaScript code to gather and format the data
+    window.addEventListener('DOMContentLoaded', function() {
+      // Use an AJAX request to fetch data from a website
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://example.com/data', true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var responseData = JSON.parse(xhr.responseText);
+          var dataList = document.getElementById('data-list');
+          
+          // Iterate over the data and create list items
+          for (var i = 0; i < responseData.length; i++) {
+            var listItem = document.createElement('li');
+            listItem.textContent = responseData[i].name;
+            dataList.appendChild(listItem);
+          }
+        }
+      };
+      xhr.send();
+    });
+  </script>
+</body>
+</html>
