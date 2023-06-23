@@ -26,7 +26,7 @@
     // JavaScript code to gather and format the data
     window.addEventListener('DOMContentLoaded', function() {
       // Use an AJAX request to fetch data from a website
-      var xhr = new XMLHttpRequest();
+      var xhr = new XMLHttpRequest('https://dutchie.com/dispensary/curaleaf-pa-harrisburg/products/flower?weight=1-2oz');
       xhr.open('GET', 'URL', true);
       xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
