@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data Collection and Formatting</title>
-  <style>
-    /* CSS styles for the formatted list */
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    li {
-      padding: 5px;
-      background-color: #f2f2f2;
-      margin-bottom: 5px;
-    }
-  </style>
+    <title>Product Scraper</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
-  <h1>Data Collection and Formatting</h1>
-  
-  <h2>Collected Data:</h2>
-  <ul id="data-list"></ul>
-  
-  <script>
-    // JavaScript code to gather and format the data
-    window.addEventListener('DOMContentLoaded', function() {
-      // Use an AJAX request to fetch data from a website
-      var xhr = new XMLHttpRequest('https://dutchie.com/dispensary/curaleaf-pa-harrisburg/products/flower?weight=1-2oz');
-      xhr.open('GET', 'URL', true);
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var responseData = JSON.parse(xhr.responseText);
-          var dataList = document.getElementById('data-list');
-          
-          // Iterate over the data and create list items
-          for (var i = 0; i < responseData.length; i++) {
-            var listItem = document.createElement('li');
-            listItem.textContent = responseData[i].name;
-            dataList.appendChild(listItem);
-          }
-        }
-      };
-      xhr.send();
-    });
-  </script>
+    <h1>Product Scraper</h1>
+
+    <form action="/scrape" method="post">
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url">
+        <input type="submit" value="Scrape">
+    </form>
+
+    {% if products %}
+        <h2>Products:</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.description }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 </body>
 </html>
